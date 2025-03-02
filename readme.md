@@ -1,126 +1,97 @@
-# QuantFrame
+# AI Agent README - QuantFrame Project
 
-A comprehensive framework for quantitative financial research, backtesting, and live trading.
+## Project Context
 
-## Overview
+This document provides essential context for AI assistants working on the QuantFrame project - a comprehensive quantitative financial research and trading framework. As an AI assistant, you should use this document to understand the project's goals, architecture, and implementation priorities.
 
-QuantFrame is designed to provide a complete ecosystem for quantitative financial research and trading. It streamlines the process from data acquisition to strategy development and live deployment, with a focus on maintainability, reproducibility, and seamless transition between research and production.
+## Project Vision
 
-## Features
+QuantFrame aims to create a unified ecosystem where quantitative financial models can be:
 
-- **Unified Data Management**: Centralized ETL processes, automated ingestion, and standardized access patterns
-- **Robust Backtesting**: Multi-asset, multi-timeframe simulation with realistic market mechanics
-- **Production-Ready Trading**: Seamless transition from research to live trading
-- **Model Flexibility**: Support for statistical, factor-based, and machine learning approaches
-- **Risk Management**: Integrated position sizing and risk controls
+1. Researched and developed using historical data
+2. Rigorously backtested with realistic market conditions
+3. Seamlessly deployed to live trading with minimal code changes
 
-## Project Structure
+The core philosophy is "write once, run anywhere" - any trading strategy or model should work identically in both research and production environments.
+
+## Current State
+
+We are in the initial architecture and implementation planning phase. The directory structure has been established as follows:
 
 ```
 quantframe/
-├── data/               # Data acquisition, processing, and storage
-├── research/           # Backtesting and model development
-├── execution/          # Live trading infrastructure
-├── common/             # Shared utilities and interfaces
-├── tests/              # Unit and integration tests
+├── data/               # ETL, automated ingestion, market data management
+├── research/           # Backtesting framework and model development
+├── execution/          # Live trading implementation
+├── common/             # Shared components used across all modules
+├── tests/              # Testing infrastructure
 ├── docs/               # Documentation
-├── scripts/            # CLI tools and utility scripts
+├── scripts/            # Utility scripts
 ├── examples/           # Example implementations
-└── infrastructure/     # Deployment and CI/CD
+└── infrastructure/     # Deployment configuration
 ```
 
-### Key Components
+## Key Challenges to Address
 
-#### Data Layer
+As an AI assistant, be prepared to help with the following technical challenges:
 
-- Data connectors for market and alternative data sources
-- Processing pipelines for cleaning and feature engineering
-- Unified storage interfaces for efficient data access
+1. **Data Consistency**: Ensuring identical data processing between backtesting and live environments
+2. **Market Simulation Accuracy**: Creating realistic backtests that account for slippage, fees, and market impact
+3. **Model Portability**: Designing interfaces that allow models to run unchanged in both research and production
+4. **Performance Optimization**: Balancing computational efficiency with accuracy in data-intensive operations
+5. **Risk Management**: Implementing robust safeguards for live trading operations
 
-#### Research Layer
+## Technical Stack Considerations
 
-- Backtesting engine with realistic market simulation
-- Strategy development framework
-- Performance analytics and visualization
+- **Primary Language**: Python
+- **Data Processing**: Pandas, NumPy, possibly Dask for larger datasets
+- **Machine Learning**: Optional components using scikit-learn, PyTorch, or similar
+- **Database**: Time-series databases (InfluxDB, TimescaleDB) for market data
+- **Deployment**: Docker containers, possibly Kubernetes for scaling
 
-#### Execution Layer
+## Development Priorities
 
-- Broker-agnostic trading interfaces
-- Order management and execution algorithms
-- Real-time monitoring and alerting
+1. First priority: Core data infrastructure and interfaces
+2. Second priority: Backtesting engine with basic strategy templates
+3. Third priority: Paper trading simulation
+4. Fourth priority: Live trading with broker connections
+5. Fifth priority: Advanced analytics and reporting
 
-#### Common Layer
+## Design Principles to Follow
 
-- Shared interfaces ensuring compatibility between research and production
-- Configuration management
-- Logging and error handling
+When suggesting implementations or solutions, adhere to these principles:
 
-## Getting Started
+1. **Modularity**: Components should be loosely coupled through well-defined interfaces
+2. **Testability**: Code should be structured for easy unit and integration testing
+3. **Configurability**: Major parameters should be configurable without code changes
+4. **Extensibility**: Easy to add new data sources, models, or brokers
+5. **Reproducibility**: Results should be reproducible with the same inputs
 
-### Prerequisites
+## Expected Interactions
 
-- Python 3.8+
-- Recommended: Anaconda or Miniconda
+As an AI assistant, you may be asked to:
 
-### Installation
+1. Suggest implementation patterns for specific components
+2. Write code examples for core functionality
+3. Review proposed architectures or implementations
+4. Help debug issues in data processing or algorithm logic
+5. Recommend best practices for quantitative finance software
+6. Assist with performance optimization
 
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/quantframe.git
-cd quantframe
+## Implementation Notes
 
-# Create and activate a virtual environment
-conda create -n quantframe python=3.9
-conda activate quantframe
+- **Data Access Pattern**: All components should access data through the same interfaces
+- **Model Interface**: Trading strategies need standard methods for initialization, receiving data, and generating signals
+- **Configuration**: Use a consistent approach to configuration management across all components
+- **Logging**: Comprehensive logging is crucial for debugging and performance analysis
 
-# Install dependencies
-pip install -r requirements.txt
-```
+## Next Steps
 
-### Quick Start
+The immediate focus is on implementing the core data infrastructure and establishing the interfaces between components. This includes:
 
-```python
-from quantframe.data import DataManager
-from quantframe.research import Backtest
-from quantframe.models import ExampleStrategy
+1. Defining abstract interfaces in the `common/interfaces/` directory
+2. Implementing basic data connectors for common financial data sources
+3. Creating the foundation of the backtesting engine
+4. Setting up the project environment and dependencies
 
-# Load and prepare data
-dm = DataManager()
-data = dm.get_data('AAPL', start='2020-01-01', end='2021-01-01')
-
-# Create and run a backtest
-strategy = ExampleStrategy(params={'window': 20})
-backtest = Backtest(data=data, strategy=strategy)
-results = backtest.run()
-
-# Analyze results
-results.plot_performance()
-print(results.metrics)
-
-# Deploy to live trading
-from quantframe.execution import TradingEngine
-engine = TradingEngine(strategy=strategy, broker='example_broker')
-engine.start()
-```
-
-## Extending the Framework
-
-### Adding a New Data Source
-
-Create a new connector in `data/connectors/` that implements the `DataSourceInterface`.
-
-### Developing a Strategy
-
-Implement the `StrategyInterface` in `research/models/` and use the backtesting engine to evaluate performance.
-
-### Supporting a New Broker
-
-Add a new broker implementation in `execution/brokers/` that conforms to the `BrokerInterface`.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+Your assistance in planning and implementing these components will be invaluable for creating a robust, maintainable quantitative research framework.
