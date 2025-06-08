@@ -37,7 +37,7 @@ def update_fundamental_history():
         if ticker in processed:
             continue
         try:
-            for fin in connector.client.vx.list_stock_financials(ticker=ticker, limit=1000):
+            for fin in connector.client.vx.list_stock_financials(ticker=ticker):
                 fundamental_records.append({"ticker": ticker, **asdict(fin)})
         except Exception as e:
             print(e)
